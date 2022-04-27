@@ -3,7 +3,7 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
 import DataList from "./DataList";
-import { PhoneIcon, Search2Icon, SearchIcon } from "@chakra-ui/icons";
+import { Search2Icon } from "@chakra-ui/icons";
 
 const AutoComplete = ({ getSearchData }) => {
     const [searchValue, setSearchValue] = useState("");
