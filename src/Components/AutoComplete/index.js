@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement, Spinner, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
 import DataList from "./DataList";
@@ -28,12 +28,13 @@ const AutoComplete = ({ getSearchData }) => {
         searchQuery.refetch();
     }, [searchValue]);
 
+    const InputLeftIcon = searchQuery.isLoading ? Spinner : Search2Icon;
     return (
         <Fragment>
             <InputGroup>
                 <InputLeftElement
                     pointerEvents="none"
-                    children={<Search2Icon color="gray.300" />}
+                    children={<InputLeftIcon color="gray.300" />}
                     height="100%"
                 />
                 <Input
@@ -48,6 +49,7 @@ const AutoComplete = ({ getSearchData }) => {
                 />
             </InputGroup>
             {!isSearchValueSelected ? <DataList dataList={dataList} selectOption={selectOption} /> : null}
+            {searchQuery.isError ? <Text color="red" fontSize='md'>{searchQuery.error.message}</Text> : null}
         </Fragment>
     );
 }
